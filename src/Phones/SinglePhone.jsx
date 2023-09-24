@@ -21,7 +21,6 @@ const SinglePhone = ({ singlePhone }) => {
         swal("Good job!", "Product added", "success");
       }
     }
-    console.log(favoritePhones);
   };
 
   return (
