@@ -10,9 +10,15 @@ const SinglePhone = ({ singlePhone }) => {
       favoritePhones.push(singlePhone);
       localStorage.setItem("favorite", JSON.stringify(favoritePhones));
     } else {
-      favoritePhones.push(...favoritePhone, singlePhone);
-      localStorage.setItem("favorite", JSON.stringify(favoritePhones));
+      const duplicate = favoritePhone.find((item) => item.id === id);
+      if (duplicate) {
+        return alert("You can't select a phone twice");
+      } else {
+        favoritePhones.push(...favoritePhone, singlePhone);
+        localStorage.setItem("favorite", JSON.stringify(favoritePhones));
+      }
     }
+
     console.log(favoritePhones);
   };
   return (
