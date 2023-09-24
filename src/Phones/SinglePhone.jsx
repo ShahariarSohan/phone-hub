@@ -2,8 +2,19 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const SinglePhone = ({ singlePhone }) => {
-  const { image, phone_name, brand_name } = singlePhone || {};
-  console.log(singlePhone);
+  const { id, image, phone_name, brand_name } = singlePhone || {};
+  const handleAddToFavorites = () => {
+    const favoritePhones = [];
+    const favoritePhone = JSON.parse(localStorage.getItem("favorite"));
+    if (!favoritePhone) {
+      favoritePhones.push(singlePhone);
+      localStorage.setItem("favorite", JSON.stringify(favoritePhones));
+    } else {
+      favoritePhones.push(...favoritePhone, singlePhone);
+      localStorage.setItem("favorite", JSON.stringify(favoritePhones));
+    }
+    console.log(favoritePhones);
+  };
   return (
     <div className="flex justify-center ">
       <div className=" mt-5 relative flex justify-center items-center w-full max-w-[48rem] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
@@ -18,8 +29,9 @@ const SinglePhone = ({ singlePhone }) => {
             {phone_name}
           </h4>
 
-          <Link to="/favorites" className="inline-block">
+          <Link to={`/favorites/${id}`} className="inline-block">
             <button
+              onClick={handleAddToFavorites}
               className="flex select-none items-center gap-2 rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
             >
@@ -28,14 +40,14 @@ const SinglePhone = ({ singlePhone }) => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 aria-hidden="true"
                 className="h-4 w-4"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                 ></path>
               </svg>
