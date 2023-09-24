@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
 const SinglePhone = ({ singlePhone }) => {
   const { id, image, phone_name, brand_name } = singlePhone || {};
@@ -9,18 +10,20 @@ const SinglePhone = ({ singlePhone }) => {
     if (!favoritePhone) {
       favoritePhones.push(singlePhone);
       localStorage.setItem("favorite", JSON.stringify(favoritePhones));
+      swal("Good job!", "Product added", "success");
     } else {
       const duplicate = favoritePhone.find((item) => item.id === id);
       if (duplicate) {
-        return alert("You can't select a phone twice");
+        return swal("Not good!", "You can't add twice", "error");
       } else {
         favoritePhones.push(...favoritePhone, singlePhone);
         localStorage.setItem("favorite", JSON.stringify(favoritePhones));
+        swal("Good job!", "Product added", "success");
       }
     }
-
     console.log(favoritePhones);
   };
+
   return (
     <div className="flex justify-center ">
       <div className=" mt-5 relative flex justify-center items-center w-full max-w-[48rem] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
