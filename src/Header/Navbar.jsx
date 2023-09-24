@@ -3,15 +3,15 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="shadow-xl bg-base-100">
-      <nav>
+      <nav className=" container mx-auto flex justify-between items-center p-5">
         <h1 className="text-3xl font-bold">PhoneShop</h1>
-        <div>
-          <ul>
+        <div className="font-bold">
+          <ul className="flex gap-5">
             <li>
               <NavLink
                 to="/"
                 className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "active" : ""
+                  isPending ? "pending" : isActive ? "text-red-600" : ""
                 }
               >
                 Home
@@ -21,7 +21,7 @@ const Navbar = () => {
               <NavLink
                 to="/favorites"
                 className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "active" : ""
+                  isPending ? "pending" : isActive ? "text-red-600" : ""
                 }
               >
                 Favorites
@@ -31,7 +31,7 @@ const Navbar = () => {
               <NavLink
                 to="/login"
                 className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "active" : ""
+                  isPending ? "pending" : isActive ? "text-red-600" : ""
                 }
               >
                 Login
